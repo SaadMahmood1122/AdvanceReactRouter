@@ -40,14 +40,12 @@ const router = createBrowserRouter([
         path: "/events",
         element: <EventsPage />,
         loader: async () => {
-          const response = await fetch("http://localhost:8080/events");
+          const response = await fetch("http://localhost:8080/events/eee");
 
           if (!response.ok) {
-            //setError("Fetching events failed.");
+            return { isError: true, message: "Response not found" };
           } else {
-            const resData = await response.json();
-            console.log("resData", resData);
-            return resData.events;
+            return response;
           }
         },
       },
